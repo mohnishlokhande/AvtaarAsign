@@ -10,7 +10,6 @@ class HomePage extends StatefulWidget {
 }
 
 int i = 0;
-Color PrimaryColor = Colors.black;
 
 class _HomePageState extends State<HomePage> {
   @override
@@ -37,6 +36,7 @@ class _HomePageState extends State<HomePage> {
             centerTitle: true,
             elevation: 0.0,
             actions: <Widget>[
+              // Image.asset('assets/BG.jpg'),
               IconButton(
                 icon: Icon(Icons.grade_outlined),
                 iconSize: 30.0,

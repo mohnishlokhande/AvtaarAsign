@@ -1,7 +1,8 @@
 import 'package:avtaar_assign/model/lesson.dart';
 import 'package:flutter/material.dart';
-//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+//flutter build apk --build-name=1.0.3 --build-number=3
 class DesignLe extends StatefulWidget {
   int colorVal;
   DesignLe(this.colorVal);
@@ -53,42 +54,54 @@ class _DesignTabState extends State<DesignLe>
 
   Widget _buildRow(Lessons p) {
     final already = _marked.contains(p);
-    return Card(
-      child: ListTile(
-        title: Text(
-          p.name,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-        leading: Image.asset(p.imageUrl),
-        //CircleAvatar(backgroundImage: AssetImage(p.imageUrl)),
-        subtitle: Text(p.subtitle),
-        trailing: IconButton(
-          icon: already ? Icon(Icons.bookmark) : Icon(Icons.bookmark_border),
-          color: already ? Colors.black : null,
-          onPressed: () {
-            setState(() {
-              if (already) {
-                _marked.remove(p);
-              } else {
-                _marked.add(p);
-              }
-            });
-          },
-        ),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => BlockScreen(),
-              // Pass the arguments as part of the RouteSettings. The
-              // DetailScreen reads the arguments from these settings.
-              settings: RouteSettings(
-                arguments: p,
-              ),
+    return Row(
+      children: <Widget>[
+        Expanded(
+            child: Card(
+          child: ListTile(
+            contentPadding: EdgeInsets.all(16.0),
+            title: Text(
+              p.name,
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-          );
-        },
-      ),
+            leading: Image.asset(p.imageUrl),
+            //CircleAvatar(backgroundImage: AssetImage(p.imageUrl)),
+            subtitle: Text(p.subtitle),
+            trailing: IconButton(
+              icon:
+                  already ? Icon(Icons.bookmark) : Icon(Icons.bookmark_border),
+              color: already ? Colors.black : null,
+              padding: EdgeInsets.only(bottom: 40.0, left: 15.0),
+              onPressed: () {
+                setState(() {
+                  if (already) {
+                    _marked.remove(p);
+                  } else {
+                    _marked.add(p);
+                  }
+                });
+              },
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BlockScreen(),
+                  settings: RouteSettings(
+                    arguments: p,
+                  ),
+                ),
+              );
+            },
+          ),
+        )),
+        IconButton(
+            icon: Icon(
+              Icons.lock_open_outlined,
+              color: Colors.grey[400],
+            ),
+            onPressed: () {}),
+      ],
     );
   }
 }
@@ -98,7 +111,6 @@ class BlockScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Lessons pass = ModalRoute.of(context).settings.arguments;
 
-    // Use the Todo to create the UI.
     return Scaffold(
       appBar: AppBar(
         title: Text(pass.name),
