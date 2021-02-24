@@ -9,7 +9,7 @@ class OtherComp extends StatelessWidget {
             //appBar: AppBar(title: Text('Word Pair')),
             body: Center(
                 child: Text(
-          'Hello',
+          'Other Component',
           style: TextStyle(fontSize: 22.0),
         ))));
   }

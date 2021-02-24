@@ -9,6 +9,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
+int i = 0;
 Color PrimaryColor = Colors.black;
 
 class _HomePageState extends State<HomePage> {
@@ -26,7 +27,14 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {},
             ),
             backgroundColor: Colors.white,
-            title: Text('Lessons'),
+            title: Text(
+              'Lessons',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            centerTitle: true,
             elevation: 0.0,
             actions: <Widget>[
               IconButton(
@@ -39,24 +47,28 @@ class _HomePageState extends State<HomePage> {
             bottom: TabBar(
               isScrollable: true,
               indicatorColor: Colors.purple,
-              indicatorWeight: 6.0,
+              indicatorWeight: 4.0,
+              indicatorSize: TabBarIndicatorSize.label,
               onTap: (index) {
                 setState(() {
                   switch (index) {
                     case 0:
-                      PrimaryColor = Color(0xffff5722);
+                      i = 0;
                       break;
                     case 1:
-                      PrimaryColor = Color(0xff3f51b5);
+                      i = 1;
                       break;
                     case 2:
-                      PrimaryColor = Color(0xffe91e63);
+                      i = 2;
                       break;
                     case 3:
-                      PrimaryColor = Color(0xff9c27b0);
+                      i = 3;
                       break;
                     case 4:
-                      PrimaryColor = Color(0xff2196f3);
+                      i = 4;
+                      break;
+                    case 5:
+                      i = 5;
                       break;
                     default:
                   }
@@ -67,7 +79,10 @@ class _HomePageState extends State<HomePage> {
                   child: Container(
                     child: Text(
                       'Design',
-                      style: TextStyle(color: Colors.black, fontSize: 18.0),
+                      style: TextStyle(
+                        color: i == 0 ? Colors.black : Colors.grey,
+                        fontSize: 16.0,
+                      ),
                     ),
                   ),
                 ),
@@ -75,7 +90,10 @@ class _HomePageState extends State<HomePage> {
                   child: Container(
                     child: Text(
                       'Environment',
-                      style: TextStyle(color: Colors.black, fontSize: 18.0),
+                      style: TextStyle(
+                        color: i == 1 ? Colors.black : Colors.grey,
+                        fontSize: 16.0,
+                      ),
                     ),
                   ),
                 ),
@@ -83,7 +101,9 @@ class _HomePageState extends State<HomePage> {
                   child: Container(
                     child: Text(
                       'Techology',
-                      style: TextStyle(color: Colors.black, fontSize: 18.0),
+                      style: TextStyle(
+                          color: i == 2 ? Colors.black : Colors.grey,
+                          fontSize: 16.0),
                     ),
                   ),
                 ),
@@ -91,7 +111,9 @@ class _HomePageState extends State<HomePage> {
                   child: Container(
                     child: Text(
                       'Research',
-                      style: TextStyle(color: Colors.black, fontSize: 18.0),
+                      style: TextStyle(
+                          color: i == 3 ? Colors.black : Colors.grey,
+                          fontSize: 16.0),
                     ),
                   ),
                 ),
@@ -99,7 +121,9 @@ class _HomePageState extends State<HomePage> {
                   child: Container(
                     child: Text(
                       '5th',
-                      style: TextStyle(color: Colors.black, fontSize: 18.0),
+                      style: TextStyle(
+                          color: i == 4 ? Colors.black : Colors.grey,
+                          fontSize: 16.0),
                     ),
                   ),
                 ),
@@ -107,7 +131,9 @@ class _HomePageState extends State<HomePage> {
                   child: Container(
                     child: Text(
                       '6th',
-                      style: TextStyle(color: Colors.black, fontSize: 18.0),
+                      style: TextStyle(
+                          color: i == 5 ? Colors.black : Colors.grey,
+                          fontSize: 16.0),
                     ),
                   ),
                 )
