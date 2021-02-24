@@ -1,7 +1,10 @@
 import 'package:avtaar_assign/Component/category.dart';
+//import 'package:avtaar_assign/Component/design.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
+  final Widget child;
+  HomeScreen({Key key, this.child}) : super(key: key);
   @override
   HomeScreenState createState() => HomeScreenState();
 }
@@ -37,6 +40,7 @@ class HomeScreenState extends State<HomeScreen> {
       body: Column(
         children: <Widget>[
           Selector(),
+          // LessonPg(),
         ],
       ),
     );
