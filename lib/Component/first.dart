@@ -15,6 +15,7 @@ class _DesignTabState extends State<DesignLe>
   TabController _tabController;
 
   final _marked = Set<Lessons>();
+  final _locked = Set<Lessons>();
 
   @override
   void initState() {
@@ -54,53 +55,105 @@ class _DesignTabState extends State<DesignLe>
 
   Widget _buildRow(Lessons p) {
     final already = _marked.contains(p);
+    final _lock = _locked.contains(p);
+    int x = p.progress;
     return Row(
       children: <Widget>[
         Expanded(
             child: Card(
-          child: ListTile(
-            contentPadding: EdgeInsets.all(16.0),
-            title: Text(
-              p.name,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            leading: Image.asset(p.imageUrl),
-            //CircleAvatar(backgroundImage: AssetImage(p.imageUrl)),
-            subtitle: Text(p.subtitle),
-            trailing: IconButton(
-              icon:
-                  already ? Icon(Icons.bookmark) : Icon(Icons.bookmark_border),
-              color: already ? Colors.black : null,
-              padding: EdgeInsets.only(bottom: 40.0, left: 15.0),
-              onPressed: () {
-                setState(() {
-                  if (already) {
-                    _marked.remove(p);
-                  } else {
-                    _marked.add(p);
-                  }
-                });
-              },
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BlockScreen(),
-                  settings: RouteSettings(
-                    arguments: p,
+          child: Column(
+            children: <Widget>[
+              ListTile(
+                contentPadding: EdgeInsets.all(16.0),
+                title: Text(
+                  p.name,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                leading: Image.asset(p.imageUrl),
+                //CircleAvatar(backgroundImage: AssetImage(p.imageUrl)),
+                subtitle: Text(p.subtitle),
+                trailing: IconButton(
+                  icon: already
+                      ? Icon(Icons.bookmark)
+                      : Icon(Icons.bookmark_border),
+                  color: already ? Colors.black : null,
+                  padding: EdgeInsets.only(bottom: 40.0, left: 15.0),
+                  onPressed: () {
+                    setState(() {
+                      if (already) {
+                        _marked.remove(p);
+                      } else {
+                        _marked.add(p);
+                      }
+                    });
+                  },
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BlockScreen(),
+                      settings: RouteSettings(
+                        arguments: p,
+                      ),
+                    ),
+                  );
+                },
+              ),
+              Row(children: <Widget>[
+                //    for (int i = 0; i < x;i++){
+
+                //    }
+                Expanded(
+                  child: Divider(
+                    color: x == 0
+                        ? Colors.grey[300]
+                        : Colors.lightGreenAccent[700],
+                    thickness: 5,
+                    indent: 5,
                   ),
                 ),
-              );
-            },
+                Expanded(
+                    child: Divider(
+                  color: (x == 0 || x == 1)
+                      ? Colors.grey[300]
+                      : Colors.lightGreenAccent[700],
+                  thickness: 5,
+                  indent: (x == 0 || x == 1) ? 0 : 5,
+                )),
+                Expanded(
+                  child: Divider(
+                    color: x == 3
+                        ? Colors.lightGreenAccent[700]
+                        : Colors.grey[300],
+                    thickness: 5,
+                    indent: x == 3 ? 5 : 0,
+                    endIndent: 5,
+                  ),
+                ),
+              ])
+            ],
           ),
         )),
         IconButton(
-            icon: Icon(
-              Icons.lock_open_outlined,
-              color: Colors.grey[400],
-            ),
-            onPressed: () {}),
+            icon: _lock
+                ? Icon(
+                    Icons.lock_outline_rounded,
+                    color: Colors.grey[400],
+                  )
+                : Icon(
+                    Icons.lock_open_outlined,
+                    color: Colors.grey[400],
+                  ),
+            onPressed: () {
+              setState(() {
+                if (_lock) {
+                  _locked.remove(p);
+                } else {
+                  _locked.add(p);
+                }
+              });
+            }),
       ],
     );
   }
