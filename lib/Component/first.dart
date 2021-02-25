@@ -106,9 +106,7 @@ class _DesignTabState extends State<DesignLe>
                 //    }
                 Expanded(
                   child: Divider(
-                    color: x == 0
-                        ? Colors.grey[300]
-                        : Colors.lightGreenAccent[700],
+                    color: x == 0 ? Colors.grey[300] : Colors.lightGreen[600],
                     thickness: 5,
                     indent: 5,
                   ),
@@ -117,17 +115,15 @@ class _DesignTabState extends State<DesignLe>
                     child: Divider(
                   color: (x == 0 || x == 1)
                       ? Colors.grey[300]
-                      : Colors.lightGreenAccent[700],
+                      : Colors.lightGreen[600],
                   thickness: 5,
-                  indent: (x == 0 || x == 1) ? 0 : 5,
+                  indent: 5,
                 )),
                 Expanded(
                   child: Divider(
-                    color: x == 3
-                        ? Colors.lightGreenAccent[700]
-                        : Colors.grey[300],
+                    color: x == 3 ? Colors.lightGreen[600] : Colors.grey[300],
                     thickness: 5,
-                    indent: x == 3 ? 5 : 0,
+                    indent: 5,
                     endIndent: 5,
                   ),
                 ),
